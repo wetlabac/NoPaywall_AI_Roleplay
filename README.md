@@ -14,7 +14,21 @@ This stack combines text generation (Ollama), a powerful web interface (SillyTav
 | :---: | :---: |
 | ![Settings](screenshots/settings.png) | ![Modal](screenshots/modal.png) |
 
+<<<<<<< HEAD
 ## 📦 Components & Credits
+=======
+### 🖼️ Screenshots
+*Here is how the extension menu looks in SillyTavern (mobile view):*
+<img src="file.webp" width="300" alt="Extension Menu">
+
+### Core Features
+*   **🔍 Image Analysis (Import Tags):** Upload any reference image. The script extracts Danbooru tags via ComfyUI (using the DeepGelbooru model) and puts them into an editable field.
+*   **🎨 Instant Variation:** Upload an image, and the script will extract tags and **immediately generate** a new image based on them.
+*   **💬 Text-to-Image:** Create images purely from a text prompt, no reference needed.
+*   **🧠 Automatic LoRA Loading:** The script detects the active character in SillyTavern and automatically finds the matching LoRA file in your ComfyUI `models/loras` folder. No manual selection required.
+*   **📱 PC & Mobile Support:** Automatically detects the host IP address (`window.location.hostname`), allowing seamless use from both desktop and mobile browsers on the same local network.
+*   **📸 In-Chat Image Insertion:** Uses the Base64 method (adapted from *Image Gen Kazuma*) to save generated images directly into SillyTavern's folder. This guarantees that images display correctly in the chat, even on mobile devices.
+>>>>>>> 2a879f474a699d73477a27d5b314391aa89ebb3b
 
 This project stands on the shoulders of giants. Huge thanks to the original authors:
 
@@ -28,20 +42,63 @@ This project stands on the shoulders of giants. Huge thanks to the original auth
 *   **Image Generation (Checkpoint)**: [WAI-NSFW-Illustrious-17](https://tensor.art/models/990778216270553015) by WAI0731. License: **CreativeML OpenRAIL-M** (via base model). The author permits commercial use of generated images but prohibits reselling the model itself.
 *   **Tagging Models**: `wd-eva02-large-tagger-v3` (auto-downloaded) and [v2ray/deepgelbooru](https://huggingface.co/v2ray/deepgelbooru) by v2ray. DeepGelbooru is licensed under **MIT**.
 
+<<<<<<< HEAD
 ### Custom Nodes & Extensions
 *   **SillyTavern Image Extension**: Based on [Image-gen-kazuma](https://github.com/Arif-salah/Image-gen-kazuma) by Arif-salah. Licensed under **MIT**. (Heavily modified in this repo to support the dual-tagger workflow and API structure).
 *   **ComfyUI Node (WD Tagger)**: [ComfyUI-WD-Timm-Tagger](https://github.com/bedovyy/ComfyUI-WD-Timm-Tagger) by bedovyy. Licensed under **MIT**.
 *   **ComfyUI Node (ImgUtils)**: [comfyui-imgutils](https://github.com/xiaden/comfyui-imgutils) by xiaden. Licensed under **MIT**.
+=======
+1.  **Clone this repository** or download it as a ZIP.
+2.  **SillyTavern Extension:** Place the `Ult_generation` folder into your SillyTavern directory:
+    `SillyTavern/public/scripts/extensions/third-party/Ult_generation/`
+3.  **ComfyUI Requirements:** Ensure you have installed the `comfyui-imgutils` plugin in your ComfyUI `custom_nodes` folder.
+4.  **Scripts:** Place `start_all.bat`, `stop_all.bat`, `start_bot.bat`, and `start_bot.vbs` in your root AI folder (e.g., `E:\AI\`).
+5.  **Telegram Bot:** Configure your bot token in the `ai_bot.py` script (or use environment variables).
+6.  Restart SillyTavern. A **camera icon** (📷) will appear in the message input bar.
+>>>>>>> 2a879f474a699d73477a27d5b314391aa89ebb3b
 
 ---
 
 ## 🚀 Installation Guide
 
+<<<<<<< HEAD
 ### Prerequisites
 *   Windows 10/11
 *   NVIDIA GPU (RTX 3070 Ti or better recommended for 8GB VRAM)
 *   Node.js (LTS version) for SillyTavern
 *   Git (optional, but recommended)
+=======
+## 🌐 Disabling Auto-Translation (Important!)
+
+If your browser (like Chrome or Yandex) automatically translates the page, it can break the SillyTavern interface and translate technical terms (like "Checkpoint" or "LoRA") into Russian, making it impossible to find the correct settings.
+
+To prevent this:
+1.  **In your browser settings**: Go to Settings -> Languages -> Disable "Offer to translate pages".
+2.  **On the page**: If a translation bar appears at the top of the page, click "Options" (three dots) and select **"Never translate this site"**.
+3.  **SillyTavern settings**: Inside SillyTavern, go to the User Settings (icon of a person) and set the Interface Language to **English** to ensure the extension buttons match the README instructions.
+
+## 🎮 Managing the Stack (Start & Stop Scripts)
+
+To make launching and closing the entire AI stack effortless, this repository includes two custom batch scripts. They are designed to be used either manually or remotely via the Telegram bot.
+
+### 🟢 How `start_all.bat` works
+This script is your one-click launcher. When executed, it performs the following steps:
+1.  **Launch Ollama:** Starts the Ollama background service if it is not already running.
+2.  **Launch ComfyUI:** Opens a new command prompt window and starts ComfyUI. It waits a few seconds to ensure the server initializes properly.
+3.  **Launch SillyTavern:** Opens another command prompt window and starts the SillyTavern server.
+4.  **Ready to Use:** Once all three windows are open, you can access SillyTavern in your browser and start chatting or generating images.
+
+### 🔴 How `stop_all.bat` works
+This script is designed for a safe and complete shutdown. It ensures that heavy AI processes are terminated to free up your GPU and RAM, but **it intentionally leaves your Telegram bot running** so you can still command the PC remotely. 
+Here is what it does:
+1.  **Stops Ollama:** Forcefully closes `ollama.exe` and `ollama app.exe`.
+2.  **Stops SillyTavern:** Uses PowerShell to find the specific process occupying port `8000` and terminates it. It also scans for any remaining `SillyTavern` related processes to ensure a clean shutdown.
+3.  **Stops ComfyUI:** Uses PowerShell to find the process occupying port `8188` and terminates it.
+4.  **Cleans up Windows:** Closes any leftover command prompt windows with titles like "ComfyUI" or "SillyTavern".
+5.  **Preserves the Bot:** It carefully avoids killing the `python.exe` process that runs `ai_bot.py`, keeping your remote control alive.
+
+## 🙏 Credits & Acknowledgments
+>>>>>>> 2a879f474a699d73477a27d5b314391aa89ebb3b
 
 ### Step 1: Install SillyTavern
 1.  Clone the repository into a folder (e.g., `E:\AI\SillyTavern`):
@@ -57,7 +114,13 @@ Extract the archive to your preferred location (e.g., E:\AI\ComfyUI).
 Step 3: Install Custom Nodes
 Open the ComfyUI Manager (or manually clone into ComfyUI/custom_nodes/):
 
+<<<<<<< HEAD
 WD-Timm-Tagger: Clone bedovyy/ComfyUI-WD-Timm-Tagger.
+=======
+*   **My Custom Code (Extension & Scripts):** Licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+*   **DeepGelbooru:** MIT License.
+*   **Image Gen Kazuma:** MIT License.
+>>>>>>> 2a879f474a699d73477a27d5b314391aa89ebb3b
 
 ImgUtils: Clone xiaden/comfyui-imgutils.
 
