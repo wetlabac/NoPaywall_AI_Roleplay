@@ -4,6 +4,16 @@
 
 This stack combines text generation (Ollama), a powerful web interface (SillyTavern), and local image generation (ComfyUI), all controlled via a Telegram bot for convenience.
 
+## 📸 Screenshots
+
+| Telegram Bot Control | SillyTavern Extension Menu |
+| :---: | :---: |
+| ![Telegram Bot](screenshots/telegram.png) | ![Menu](screenshots/menu.png) |
+
+| Extension Settings | Tag Editing Modal |
+| :---: | :---: |
+| ![Settings](screenshots/settings.png) | ![Modal](screenshots/modal.png) |
+
 ## 📦 Components & Credits
 
 This project stands on the shoulders of giants. Huge thanks to the original authors:
