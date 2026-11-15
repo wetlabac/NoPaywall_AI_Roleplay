@@ -1,0 +1,212 @@
+{
+  "10": {
+    "inputs": {
+      "text": ""
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Кодирование текста CLIP (Запрос)"
+    }
+  },
+  "11": {
+    "inputs": {
+      "text": "bad quality, worst quality, worst detail, sketch, censor, text, watermark, bad anatomy, bad hands, missing fingers, extra digits, fewer digits, extra ears, duplicate, multiple limbs, deformed, disfigured, mutated, poorly drawn face, poorly drawn hands, poorly drawn feet",
+      "clip": [
+        "26",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "Кодирование текста CLIP (Запрос)"
+    }
+  },
+  "13": {
+    "inputs": {
+      "width": 1024,
+      "height": 1344,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Пустое латентное изображение"
+    }
+  },
+  "18": {
+    "inputs": {
+      "add_noise": "enable",
+      "noise_seed": 810056877661530,
+      "steps": 20,
+      "cfg": 6,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "normal",
+      "start_at_step": 0,
+      "end_at_step": 10000,
+      "return_with_leftover_noise": "disable",
+      "model": [
+        "26",
+        0
+      ],
+      "positive": [
+        "10",
+        0
+      ],
+      "negative": [
+        "11",
+        0
+      ],
+      "latent_image": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "KSamplerAdvanced",
+    "_meta": {
+      "title": "KSampler (Расширенный)"
+    }
+  },
+  "19": {
+    "inputs": {
+      "samples": [
+        "18",
+        0
+      ],
+      "vae": [
+        "23",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "Декодировать VAE"
+    }
+  },
+  "20": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "format": "png",
+      "format.bit_depth": "8-bit",
+      "format.input_color_space": "sRGB",
+      "images": [
+        "19",
+        0
+      ]
+    },
+    "class_type": "SaveImageAdvanced",
+    "_meta": {
+      "title": "Сохранить изображение (расширенно)"
+    }
+  },
+  "23": {
+    "inputs": {
+      "ckpt_name": "WAI-Nsfw-Illustrious-17.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Загрузить сheckpoint"
+    }
+  },
+  "26": {
+    "inputs": {
+      "lora_name": "Marin_Kitagawa.safetensors",
+      "strength_model": 0.6,
+      "strength_clip": 0.6,
+      "model": [
+        "23",
+        0
+      ],
+      "clip": [
+        "23",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Загрузить LoRA"
+    }
+  },
+  "28": {
+    "inputs": {
+      "image": "Швыбзик.jpg"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Загрузить изображение"
+    }
+  },
+  "29": {
+    "inputs": {
+      "string_a": [
+        "30",
+        0
+      ],
+      "string_b": [
+        "34",
+        0
+      ],
+      "delimiter": ", "
+    },
+    "class_type": "StringConcatenate",
+    "_meta": {
+      "title": "Объединить"
+    }
+  },
+  "30": {
+    "inputs": {
+      "general_threshold": 0.35,
+      "character_threshold": 0.45,
+      "drop_overlap": false,
+      "image": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "ImgUtilsDeepGelbooru",
+    "_meta": {
+      "title": "Imgutils DeepGelbooru Tagger"
+    }
+  },
+  "33": {
+    "inputs": {
+      "source": [
+        "35",
+        0
+      ]
+    },
+    "class_type": "PreviewAny",
+    "_meta": {
+      "title": "Предпросмотр любого"
+    }
+  },
+  "34": {
+    "inputs": {
+      "model_name": "wd-eva02-large-tagger-v3",
+      "dtype": "auto",
+      "general_threshold": 0.3,
+      "character_threshold": 0.75,
+      "add_rating": false,
+      "exclude_tags": "",
+      "batch_size": 4,
+      "image": [
+        "28",
+        0
+      ]
+    },
+    "class_type": "WDTimmTagger",
+    "_meta": {
+      "title": "WD Timm Tagger"
+    }
+  },
+  "35": {
+    "inputs": {
+      "tags": [
+        "29",
+        0
+      ]
+    },
+    "class_type": "ImgUtilsDedup",
+    "_meta": {
+      "title": "Imgutils Deduplicate Tags"
+    }
+  }
+}

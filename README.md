@@ -1,67 +1,110 @@
-# 🚀 NoPaywall_AI_Roleplay: Uncensored Local AI Roleplay & Generation
+# NoPaywall_AI_Roleplay
 
-**This stack was created out of sheer frustration with paid services that charge exorbitant monthly fees for basic roleplay and image generation, while censoring NSFW content.**
+**NoPaywall_AI_Roleplay** is a fully local, self-hosted AI roleplay and image generation stack for Windows. It is designed to give you complete control over your AI interactions without relying on paid cloud services. Everything runs on your own hardware, ensuring privacy and zero subscription costs.
 
-This is a fully autonomous, free, and uncensored alternative. You own the hardware, you own the models, and you own the chat. No subscriptions, no corporate filters, no limits.
+This stack combines text generation (Ollama), a powerful web interface (SillyTavern), and local image generation (ComfyUI), all controlled via a Telegram bot for convenience.
 
-Optimized for mid-range GPUs (tested on **RTX 3070 Ti, 8GB VRAM**).
+## 📦 Components & Credits
 
-## ✨ Features: The `Ult_generation` Extension
+This project stands on the shoulders of giants. Huge thanks to the original authors:
 
-This repository includes a custom-built SillyTavern extension (`Ult_generation`), specifically designed to bridge SillyTavern and ComfyUI seamlessly.
+### Core Applications
+*   **SillyTavern**: The frontend for interacting with LLMs. [GitHub](https://github.com/SillyTavern/SillyTavern) | [Docs](https://docs.sillytavern.app/). Licensed under **AGPL-3.0**.
+*   **ComfyUI**: The node-based GUI for Stable Diffusion. [GitHub](https://github.com/comfyanonymous/ComfyUI) | [Portable Download](https://github.com/comfyanonymous/ComfyUI/releases/latest/download/ComfyUI_windows_portable_nvidia.7z). Licensed under **GPL-3.0**.
+*   **Ollama**: The local LLM runner. [Website](https://ollama.com/). Licensed under **MIT**.
 
-*   **🔍 Image Analysis (Import Tags):** Upload any reference image. The script extracts Danbooru tags via ComfyUI (using the DeepGelbooru model) and puts them into an editable field.
-*   **🎨 Instant Variation:** Upload an image, and the script will extract tags and **immediately generate** a new image based on them.
-*   **💬 Text-to-Image:** Create images purely from a text prompt, no reference needed.
-*   **🧠 Automatic LoRA Loading:** The script detects the active character in SillyTavern and automatically finds the matching LoRA file in your ComfyUI `models/loras` folder. No manual selection required.
-*   **📱 PC & Mobile Support:** Automatically detects the host IP address (`window.location.hostname`), allowing seamless use from both desktop and mobile browsers on the same local network.
-*   **📸 In-Chat Image Insertion:** Uses the Base64 method (adapted from *Image Gen Kazuma*) to save generated images directly into SillyTavern's folder. This guarantees that images display correctly in the chat, even on mobile devices.
-*   **🛑 Smart Process Management:** Includes custom `start_all.bat` and `stop_all.bat` scripts that launch the entire stack and forcefully terminate it without killing the Telegram control bot.
+### Models Used
+*   **Text Generation**: [Ministral-3-8B-Nymphaea-RP](https://huggingface.co/0xA50C1A1/Ministral-3-8B-Nymphaea-RP) by `0xA50C1A1`. Licensed under **Apache-2.0**.
+*   **Image Generation (Checkpoint)**: [WAI-NSFW-Illustrious-17](https://tensor.art/models/990778216270553015) by WAI0731. License: **CreativeML OpenRAIL-M** (via base model). The author permits commercial use of generated images but prohibits reselling the model itself.
+*   **Tagging Models**: `wd-eva02-large-tagger-v3` (auto-downloaded) and [v2ray/deepgelbooru](https://huggingface.co/v2ray/deepgelbooru) by v2ray. DeepGelbooru is licensed under **MIT**.
 
-## 🛠️ The Stack (Why it's free)
+### Custom Nodes & Extensions
+*   **SillyTavern Image Extension**: Based on [Image-gen-kazuma](https://github.com/Arif-salah/Image-gen-kazuma) by Arif-salah. Licensed under **MIT**. (Heavily modified in this repo to support the dual-tagger workflow and API structure).
+*   **ComfyUI Node (WD Tagger)**: [ComfyUI-WD-Timm-Tagger](https://github.com/bedovyy/ComfyUI-WD-Timm-Tagger) by bedovyy. Licensed under **MIT**.
+*   **ComfyUI Node (ImgUtils)**: [comfyui-imgutils](https://github.com/xiaden/comfyui-imgutils) by xiaden. Licensed under **MIT**.
 
-*   **LLM Engine:** [Ollama](https://ollama.com/) running `Ministral-3-8B-Nymphaea-RP` (Q4_K_M). A powerful, uncensored model.
-*   **Image Generation:** [ComfyUI](https://github.com/comfyanonymous/ComfyUI) running `WAI-NSFW-Illustrious-17`.
-*   **Image Analysis:** `ImgUtilsDeepGelbooru` (via `comfyui-imgutils` custom node).
-*   **User Interface:** [SillyTavern](https://github.com/SillyTavern/SillyTavern).
-*   **Control:** A custom Python Telegram bot manages the start/stop scripts, allowing you to run the AI from your phone.
+---
 
-## 🚀 Installation
+## 🚀 Installation Guide
 
-1.  **Clone this repository** or download it as a ZIP.
-2.  **SillyTavern Extension:** Place the `Ult_Generation` folder into your SillyTavern directory:
-    `SillyTavern/public/scripts/extensions/third-party/Ult_Generation/`
-3.  **ComfyUI Requirements:** Ensure you have installed the `comfyui-imgutils` plugin in your ComfyUI `custom_nodes` folder.
-4.  **Scripts:** Place `start_all.bat`, `stop_all.bat`, `start_bot.bat`, and `start_bot.vbs` in your root AI folder (e.g., `E:\AI\`).
-5.  **Telegram Bot:** Configure your bot token in the `ai_bot.py` script (or use environment variables).
-6.  Restart SillyTavern. A **camera icon** (📷) will appear in the message input bar.
+### Prerequisites
+*   Windows 10/11
+*   NVIDIA GPU (RTX 3070 Ti or better recommended for 8GB VRAM)
+*   Node.js (LTS version) for SillyTavern
+*   Git (optional, but recommended)
 
-## ⚙️ Configuration
+### Step 1: Install SillyTavern
+1.  Clone the repository into a folder (e.g., `E:\AI\SillyTavern`):
+    ```bash
+    git clone https://github.com/SillyTavern/SillyTavern -b release
+Run Start.bat to install dependencies. The web UI will open at http://127.0.0.1:8000.
 
-1.  Open the Extensions menu (puzzle icon 🧩) in SillyTavern and find **Ult_generation**.
-2.  Enter your **ComfyUI URL** (e.g., `http://192.168.0.171:8188`). Do not use `127.0.0.1` if you plan to use a phone.
-3.  Select your **Checkpoint** from the dropdown.
-4.  Start ComfyUI with the `--listen` flag to accept mobile connections.
+Step 2: Install ComfyUI
+Download the ComfyUI Windows Portable (NVIDIA).
 
-## 🙏 Credits & Acknowledgments
+Extract the archive to your preferred location (e.g., E:\AI\ComfyUI).
 
-This project stands on the shoulders of giants. Special thanks to:
+Step 3: Install Custom Nodes
+Open the ComfyUI Manager (or manually clone into ComfyUI/custom_nodes/):
 
-*   **DeepGelbooru Model:** Created by the [DeepGHS](https://deepghs.org/) community.
-*   **Image Gen Kazuma:** The in-chat image insertion method (Base64 saving) was adapted from the [Image-gen-kazuma](https://github.com/Arif-salah/Image-gen-kazuma) extension by Arif-salah.
-*   **SillyTavern & ComfyUI:** For providing the robust open-source platforms that make this stack possible.
+WD-Timm-Tagger: Clone bedovyy/ComfyUI-WD-Timm-Tagger.
 
-## 📜 Licenses
+ImgUtils: Clone xiaden/comfyui-imgutils.
 
-This project uses components from various open-source projects. Please respect their licenses:
+Install requirements:
 
-*   **My Custom Code (Extension & Scripts):** Licensed under the **MIT License**. See the `LICENSE` file for details.
-*   **DeepGelbooru:** MIT License.
-*   **Image Gen Kazuma:** MIT License.
+bash
+python_embeded\python.exe -m pip install -r ComfyUI\custom_nodes\ComfyUI-WD-Timm-Tagger\requirements.txt
+python_embeded\python.exe -m pip install -r ComfyUI\custom_nodes\comfyui-imgutils\requirements.txt
+Step 4: Download Models
+Text Model: Download Ministral-3-8B-Nymphaea-RP (GGUF format, e.g., Q4_K_M) and create a Modelfile for Ollama.
 
-## ❤️ Support the Project
+Image Models:
 
-If you find this stack useful and want to support my fight against paid, censored AI services, you can send a donation here:
+Place WAI-NSFW-Illustrious-17.safetensors in ComfyUI/models/checkpoints/.
+
+LoRA (Important): This extension automatically detects and applies a character LoRA based on the active character name in SillyTavern. To make it work, the LoRA filename (without the .safetensors extension) must match the character's name.
+
+Matching rules: The extension ignores hyphens (-) and underscores (_). It does not ignore extra words like v1, final, etc.
+
+Example: If your character is named "Marin Kitagawa", the LoRA file should be named Marin_Kitagawa.safetensors or Marin-Kitagawa.safetensors. A file named Marin_Kitagawa_v1.safetensors will not be matched automatically.
+
+Place your LoRA files in ComfyUI/models/loras/.
+
+Tagging Models: The WD-Timm-Tagger and ImgUtils nodes will automatically download wd-eva02-large-tagger-v3 and the DeepGelbooru model upon first use.
+
+Step 5: Configure ComfyUI for API Access
+Edit ComfyUI/run_nvidia_gpu.bat and add the following flags to the startup command:
+
+bat
+--listen --enable-cors-header
+This allows SillyTavern to communicate with ComfyUI over the local network.
+
+Step 6: Install the Custom Extension
+Inside this repository, locate the folder named Ult_generation.
+
+Copy the entire Ult_generation folder into your SillyTavern installation at:
+
+text
+SillyTavern/public/scripts/extensions/third-party/
+Reload SillyTavern (F5 in your browser).
+
+Step 7: Import the ComfyUI Workflow
+Open ComfyUI in your browser (http://127.0.0.1:8188).
+
+Drag and drop the provided NSFW.json file into the ComfyUI canvas.
+
+Important: The NSFW.json is an API-format export. You must ensure that the ckpt_name (Checkpoint) and lora_name (LoRA) fields in the JSON match the exact filenames on your disk, or simply leave the LoRA field empty if you rely on the extension's auto-detection.
+
+🤖 Telegram Bot (Optional)
+The repository includes ai_bot.py, a Python-based Telegram bot for remotely starting and stopping the AI services.
+
+Create a bot_settings.ini file with your bot token and allowed user IDs.
+
+Run ai_bot.py (or use start_bot.vbs for a silent background launch).
+
+📄 License
+This project is a personal compilation and is provided for educational purposes. All credit goes to the original authors of the models, nodes, and extensions listed above. Please respect their individual licenses. The author of this repository is not responsible for any misuse of the included tools or models.
 
 *   **Boosty:** [https://boosty.to/wetlabac](https://boosty.to/wetlabac)
 *   **Tribute:** [https://web.tribute.tg/e/1Pz](https://web.tribute.tg/e/1Pz)

@@ -7,66 +7,68 @@ set "COMFY_BAT=E:\AI\ComfyUI\run_nvidia_gpu.bat"
 set "ST_DIR=E:\AI\SillyTavern"
 set "ST_BAT=E:\AI\SillyTavern\Start.bat"
 
-echo Проверяю файлы...
+title Start AI Stack
+
+echo Checking files...
 
 if not exist "%COMFY_BAT%" (
-    echo ОШИБКА: не найден "%COMFY_BAT%"
+    echo ERROR: "%COMFY_BAT%" not found
     pause
     exit /b 1
 )
 
 if not exist "%ST_BAT%" (
-    echo ОШИБКА: не найден "%ST_BAT%"
+    echo ERROR: "%ST_BAT%" not found
     pause
     exit /b 1
 )
 
-echo Проверяю Ollama...
+echo Checking Ollama...
 call :check_port 11434
 
 if errorlevel 1 (
     if not exist "E:\AI\Ollama\ollama.exe" (
-        echo ОШИБКА: не найден E:\AI\Ollama\ollama.exe
+        echo ERROR: E:\AI\Ollama\ollama.exe not found
     ) else (
-        echo Запускаю Ollama...
+        echo Starting Ollama...
         start "Ollama" /min "E:\AI\Ollama\ollama.exe" serve
-        timeout /t 5 /nobreak >nul
+        ping 127.0.0.1 -n 6 >nul
 
         call :check_port 11434
         if errorlevel 1 (
-            echo Ollama запущена, но порт 11434 пока не отвечает.
+            echo Ollama started, but port 11434 is not responding yet.
         ) else (
-            echo Ollama работает.
+            echo Ollama is running.
         )
     )
 ) else (
-    echo Ollama уже запущена.
+    echo Ollama is already running.
 )
 
-echo Проверяю ComfyUI...
+echo Checking ComfyUI...
 call :check_port 8188
 
 if errorlevel 1 (
-    echo Запускаю ComfyUI...
+    echo Starting ComfyUI...
     start "ComfyUI" /D "%COMFY_DIR%" /min cmd.exe /c run_nvidia_gpu.bat
 ) else (
-    echo ComfyUI уже запущен.
+    echo ComfyUI is already running.
 )
 
-echo Проверяю SillyTavern...
+echo Checking SillyTavern...
 call :check_port 8000
 
 if errorlevel 1 (
-    echo Запускаю SillyTavern...
+    echo Starting SillyTavern...
     start "SillyTavern" /min cmd.exe /c call "%ST_BAT%"
 ) else (
-    echo SillyTavern уже запущен.
+    echo SillyTavern is already running.
 )
 
 echo.
-echo Команды запуска отправлены.
-echo Для телефона используй: http://IP-АДРЕС-КОМПЬЮТЕРА:8000
-echo Узнать IP компьютера можно командой: ipconfig
+echo Startup commands sent.
+echo For mobile access use: http://YOUR-IP-ADDRESS:8000
+echo Get your IP via command: ipconfig
 exit /b 0
 
 :check_port
