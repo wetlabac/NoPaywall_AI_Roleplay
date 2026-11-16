@@ -8,11 +8,11 @@ This stack combines text generation (Ollama), a powerful web interface (SillyTav
 
 | Telegram Bot Control | SillyTavern Extension Menu |
 | :---: | :---: |
-| ![Telegram Bot](https://raw.githubusercontent.com/wetlabac/NoPaywall_AI_Roleplay/main/screenshots/bot.png) | ![Menu](https://raw.githubusercontent.com/wetlabac/NoPaywall_AI_Roleplay/main/screenshots/Buttons_and_fuctions.png) |
+| ![Telegram Bot](https://raw.githubusercontent.com/wetlabac/NoPaywall_AI_Roleplay/main/screenshots/img1.png) | ![Menu](https://raw.githubusercontent.com/wetlabac/NoPaywall_AI_Roleplay/main/screenshots/img2.png) |
 
 | Extension Settings | Tag Editing Modal |
 | :---: | :---: |
-| ![Settings](https://raw.githubusercontent.com/wetlabac/NoPaywall_AI_Roleplay/main/screenshots/Extension.png) | ![Modal](https://raw.githubusercontent.com/wetlabac/NoPaywall_AI_Roleplay/main/screenshots/Promt_edit_window.png) |
+| ![Settings](https://raw.githubusercontent.com/wetlabac/NoPaywall_AI_Roleplay/main/screenshots/img3.png) | ![Modal](https://raw.githubusercontent.com/wetlabac/NoPaywall_AI_Roleplay/main/screenshots/img4.png) |
 
 ## 📦 Components & Credits
 
