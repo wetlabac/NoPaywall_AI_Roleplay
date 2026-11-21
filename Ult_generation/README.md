@@ -1,60 +1,88 @@
-# 📷 Ult\_generation for SillyTavern
+\# 📷 Ult\_generation for SillyTavern
 
-# A powerful SillyTavern extension that combines image analysis (DeepGelbooru) and image generation (ComfyUI) into a seamless workflow. Perfect for roleplaying and visual novel creation.
 
-# 
 
-# ✨ Features
+A powerful SillyTavern extension that combines image analysis (DeepGelbooru) and image generation (ComfyUI) into a seamless workflow. Perfect for roleplaying and visual novel creation.
 
-# 🔍 Image Analysis (Import Tags): Upload any reference image. The script automatically extracts Danbooru tags via ComfyUI. Edit the tags and send them straight to generation.
 
-# 🎨 Instant Variation: Upload an image, and the script will not only extract tags but also immediately generate a new image based on them.
 
-# 💬 Text-to-Image: Create images purely from a text prompt, without needing a reference.
+\## ✨ Features
 
-# 🧠 Automatic LoRA Loading: The script detects the active character in SillyTavern and automatically finds the matching LoRA in your ComfyUI folder. No more manual model selection.
 
-# 📱 PC \& Mobile Support: Automatically detects the IP address (window.location.hostname), allowing use from both desktop and mobile devices on the same network.
 
-# 📸 In-Chat Image Insertion (Kazuma Method): Results are not just opened in a new tab. The image is downloaded, converted to Base64, saved to SillyTavern's image folder, and inserted directly into the chat as an attachment.
+\*   \*\*🔍 Image Analysis (Import Tags):\*\* Upload any reference image. The script automatically extracts Danbooru tags via ComfyUI. Edit the tags and send them straight to generation.
 
-# 🚀 Installation
+\*   \*\*🎨 Instant Variation:\*\* Upload an image, and the script will not only extract tags but also immediately generate a new image based on them.
 
-# Download index.js and manifest.json.
+\*   \*\*💬 Text-to-Image:\*\* Create images purely from a text prompt, without needing a reference.
 
-# Place them in your SillyTavern folder:
+\*   \*\*🧠 Automatic LoRA Loading:\*\* The script detects the active character in SillyTavern and automatically finds the matching LoRA in your ComfyUI folder. No more manual model selection.
 
-# SillyTavern/public/scripts/extensions/third-party/ult-generation/
+\*   \*\*📱 PC \& Mobile Support:\*\* Automatically detects the IP address (`window.location.hostname`), allowing use from both desktop and mobile devices on the same network.
 
-# Restart SillyTavern.
+\*   \*\*📸 In-Chat Image Insertion (Kazuma Method):\*\* Results are not just opened in a new tab. The image is downloaded, converted to Base64, saved to SillyTavern's image folder, and inserted directly into the chat as an attachment.
 
-# A camera icon (📷) will appear in the message input bar. Click it to open the menu.
 
-# ⚙️ Setup
 
-# Open the Extensions menu (puzzle icon 🧩) and find Ult\_generation.
+\## 🚀 Installation
 
-# Enter your ComfyUI URL (e.g., http://192.168.0.171:8188). Do not use 127.0.0.1 if you plan to use a phone.
 
-# Select your Checkpoint from the dropdown.
 
-# 🛠️ Requirements
+1\.  Download the `index.js` and `manifest.json` files.
 
-# SillyTavern
+2\.  Place them in your SillyTavern extensions folder:
 
-# ComfyUI
+SillyTavern/public/scripts/extensions/third-party/Ult\_generation/
 
-# comfyui-imgutils plugin (for the ImgUtilsDeepGelbooru node)
 
-# ComfyUI network access (start with --listen)
 
-# 🙏 Credits
+text
 
-# DeepGelbooru Model: Created by the DeepGHS community (MIT License).
+3\.  Restart SillyTavern.
 
-# Image Gen Kazuma: The in-chat image insertion method (Base64 saving) is adapted from the Image-gen-kazuma extension by Arif-salah (MIT License).
+4\.  A camera icon (📷) will appear in the message input bar. Click it to open the menu.
 
-# 📜 License
 
-# This project is licensed under the MIT License. See the LICENSE file for details.
+
+\## ⚙️ Setup
+
+
+
+1\.  Open the Extensions menu (puzzle icon 🧩) and find `Ult\_generation`.
+
+2\.  Enter your ComfyUI URL (e.g., `http://192.168.0.171:8188`). \*\*Important:\*\* Do not use `127.0.0.1` if you plan to use the extension from a mobile phone.
+
+3\.  Select your Checkpoint from the dropdown.
+
+
+
+\## 🛠️ Requirements
+
+
+
+\*   \*\*SillyTavern\*\*
+
+\*   \*\*ComfyUI\*\* (running with `--listen` flag for network access)
+
+\*   \*\*comfyui-imgutils\*\* plugin (for the `ImgUtilsDeepGelbooru` node)
+
+\*   \*\*ComfyUI-WD-Timm-Tagger\*\* plugin (for the WD14 tagger node)
+
+
+
+\## 🙏 Credits
+
+
+
+\*   \*\*DeepGelbooru Model:\*\* Created by the DeepGHS community (MIT License).
+
+\*   \*\*Image Gen Kazuma:\*\* The in-chat image insertion method (Base64 saving) is adapted from the \[Image-gen-kazuma](https://github.com/Arif-salah/Image-gen-kazuma) extension by Arif-salah (MIT License).
+
+
+
+\## 📜 License
+
+
+
+This project is licensed under the MIT License. See the LICENSE file for details.
 
